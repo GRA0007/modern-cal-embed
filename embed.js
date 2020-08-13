@@ -215,6 +215,16 @@ function renderCalendar(meta, events) {
 		agenda.appendChild(days[i]);
 	}
 
+	// Empty state
+	if (events.length == 0) {
+		let emptystate = document.createElement('tr');
+		emptystate.id = 'emptystate';
+		let emptydata = document.createElement('td');
+		emptydata.appendChild(document.createTextNode('No upcoming events'));
+		emptystate.appendChild(emptydata);
+		agenda.appendChild(emptystate);
+	}
+
 	loading.style.display = 'none';
 }
 

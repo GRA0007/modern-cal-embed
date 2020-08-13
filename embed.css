@@ -136,6 +136,10 @@ nav #date {
 	box-sizing: border-box;
 	margin: 4px;
 }
+#emptystate td {
+	text-align: left !important;
+	color: var(--dark-gray);
+}
 #agenda tr td {
 	padding-top: 14px;
 	vertical-align: top;
