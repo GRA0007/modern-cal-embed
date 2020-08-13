@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Calendar Embed</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+		<link rel="stylesheet" href="embed.css" />
+	</head>
+	<body>
+		<span id="loading">Calendar is loading...</span>
+
+		<div id="top">
+			<h1 id="title">Calendar title</h1>
+			<nav>
+				<button type="button" id="btn_today" title="Jump to today">Today</button>
+
+				<!--<div id="arrows">
+					<button type="button" id="btn_prev" title="Previous day"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" /></svg></button>
+					<button type="button" id="btn_next" title="Next day"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg></button>
+				</div>-->
+
+				<label id="date_label" for="date">
+					<span>Wednesday, August 12</span>
+					<!--<svg viewBox="0 0 24 24"><path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+
+					<div id="date_dropdown">
+						<input type="date" id="date" />
+					</div>-->
+				</label>
+
+				<div class="spacer"></div>
+
+				<!--<select id="view">
+					<option selected>Agenda</option>
+					<option>Month</option>
+				</select>-->
+			</nav>
+		</div>
+
+		<table id="agenda">
+			<tr class="today">
+				<td valign="top">
+					<span class="dayname">WED</span>
+					<span class="day"><span>12</span></span>
+					<span class="month">AUG</span>
+				</td>
+				<td valign="top">
+					<div class="event" tabindex="0">
+						<div class="summary">
+							<span class="name">Game Night</span>
+							<span class="time">7:30 - 9:00 pm</span>
+						</div>
+						<div class="details">
+							<strong>When:</strong> <span class="when">Thu, August 13, 7:30pm – 9:00pm</span><br>
+							<strong>Where:</strong> <span class="where">https://discord.gg/CUxsdE3</span><br>
+							<strong>Description:</strong> <span class="description">Catch up on Discord with everyone to play some fun group games together for a chill night. Most games are free to play online, so just bring your phone and banter 🦇</span>
+						</div>
+					</div>
+					<div class="indicator" title="Current time"></div>
+					<div class="event" tabindex="0">
+						<span class="name">Second event</span>
+						<span class="time">8:30 - 11:59 pm</span>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+		<script src="ical.min.js"></script>
+		<script src="embed.js"></script>
+	</body>
+</html>

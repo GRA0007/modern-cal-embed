@@ -1,0 +1,36 @@
+body {
+	margin: 20px;
+	background: #EEE;
+	font-family: sans-serif;
+}
+main {
+	display: grid;
+	width: 100%;
+	grid-template-columns: .6fr 1.4fr;
+	grid-gap: 20px;
+}
+iframe {
+	border: 1px solid #CCC;
+	width: 100%;
+}
+
+h2 {
+	margin-top: 0;
+}
+
+input[type=url] {
+	width: 100%;
+	box-sizing: border-box;
+}
+input[type=url], select {
+	padding: 4px 6px;
+}
+
+@media screen and (max-width: 650px) {
+	main {
+		display: block;
+	}
+	iframe {
+		margin-top: 20px;
+	}
+}

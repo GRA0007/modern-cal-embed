@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Modern iCal Calendar Embed</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<h1>Modern iCal Calendar Embed</h1>
+
+		<main>
+			<div id="settings">
+				<h2>Settings</h2>
+
+				<label for="ical">iCal URL</label><br>
+				<input type="url" id="ical" placeholder="https://example.com/calendar.ical"><br><br>
+
+				<input type="checkbox" checked id="show_title">
+				<label for="show_title">Title</label><br>
+
+				<input type="checkbox" checked id="show_nav">
+				<label for="show_nav">Navigation buttons</label><br>
+
+				<input type="checkbox" checked id="show_date">
+				<label for="show_date">Date</label><br>
+				<br>
+
+				<!--<input type="checkbox" checked id="show_view">
+				<label for="show_view">View selector</label><br><br>
+
+				<label for="default_view">Default view</label><br>
+				<select id="default_view">
+					<option value="0" selected>Agenda</option>
+					<option value="1">Month</option>
+				</select><br><br>-->
+
+				<label for="color">Color</label><br>
+				<input id="color" type="color" value="#1A73E8"><br><br>
+
+				<label for="embed_link">Embed link</label>
+				<button type="button" id="copy_url">Copy</button><br>
+				<input type="url" readonly id="embed_link">
+			</div>
+			<iframe src="./iframe.html" id="iframe" height="400px"></iframe>
+		</main>
+
+		<script src="script.js"></script>
+	</body>
+</html>
