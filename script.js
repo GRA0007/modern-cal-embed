@@ -10,7 +10,7 @@ const copy_button = document.getElementById('copy_url');
 const iframe = document.getElementById('iframe');
 
 // Defaults
-let ical = '';
+let ical = 'https://gra0007.github.io/modern-cal-embed/example.ics';
 let show_title = 1;
 let show_nav = 1;
 let show_date = 1;
