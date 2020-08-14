@@ -192,6 +192,9 @@ nav #date {
 	padding: 10px;
 	cursor: pointer;
 }
+#agenda .event.open.always .summary {
+	cursor: initial;
+}
 #agenda .event .name {
 	display: block;
 	font-weight: bold;
@@ -200,6 +203,9 @@ nav #date {
 #agenda .event:focus .name,
 #agenda .event.open .name {
 	text-decoration: underline;
+}
+#agenda .event.open.always .name {
+	text-decoration: none;
 }
 #agenda .event.open .time {
 	display: none;

@@ -2,6 +2,7 @@ const ical_field = document.getElementById('ical');
 const show_title_field = document.getElementById('show_title');
 const show_nav_field = document.getElementById('show_nav');
 const show_date_field = document.getElementById('show_date');
+const show_details_field = document.getElementById('show_details');
 //const show_view_field = document.getElementById('show_view');
 //const default_view_field = document.getElementById('default_view');
 const color_field = document.getElementById('color');
@@ -14,13 +15,14 @@ let ical = 'https://gra0007.github.io/modern-cal-embed/example.ics';
 let show_title = 1;
 let show_nav = 1;
 let show_date = 1;
+let show_details = 0;
 //let show_view = 1;
 //let default_view = 0;
 let color = '#1A73E8';
 
 // Reload iframe with new params
 function refresh() {
-	let embed = `${document.URL.substr(0,document.URL.lastIndexOf('/'))}/iframe.html?ical=${encodeURIComponent(ical)}&title=${show_title}&nav=${show_nav}&date=${show_date}&color=${encodeURIComponent(color)}`;
+	let embed = `${document.URL.substr(0,document.URL.lastIndexOf('/'))}/iframe.html?ical=${encodeURIComponent(ical)}&title=${show_title}&nav=${show_nav}&date=${show_date}&details=${show_details}&color=${encodeURIComponent(color)}`;
 	embed_field.value = embed;
 	iframe.src = embed;
 }
@@ -42,6 +44,11 @@ show_nav_field.addEventListener('change', () => {
 
 show_date_field.addEventListener('change', () => {
 	show_date = show_date_field.checked ? 1 : 0;
+	refresh();
+});
+
+show_details_field.addEventListener('change', () => {
+	show_details = show_details_field.checked ? 1 : 0;
 	refresh();
 });
 

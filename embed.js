@@ -10,6 +10,7 @@ const ical = url.searchParams.get('ical');
 let show_title = url.searchParams.get('title') || 1;
 const show_nav = url.searchParams.get('nav') || 1;
 const show_date = url.searchParams.get('date') || 1;
+const show_details = url.searchParams.get('details') || 0;
 const show_view = url.searchParams.get('view') || 1;
 const default_view = url.searchParams.get('dview') || 0;
 const color = url.searchParams.get('color') || '#1A73E8';
@@ -103,7 +104,7 @@ function renderCalendar(meta, events) {
 		// Indicator
 		let eventDay = new Date(events[i].endDate.valueOf());
 		eventDay.setHours(0,0,0,0);
-		if (nowDate < events[i].startDate && !indicatorset && today.getTime() == eventDay.getTime()) {
+		if (nowDate < events[i].endDate && !indicatorset && today.getTime() == eventDay.getTime()) {
 			column.appendChild(indicator);
 			indicatorset = true;
 		}
@@ -113,13 +114,17 @@ function renderCalendar(meta, events) {
 
 		let summary = document.createElement('div');
 		summary.className = 'summary';
-		summary.tabIndex = '0';
-		summary.onkeypress = (e) => {
-			if (e.keyCode === 13) {
-				event.classList.toggle('open');
-			}
-		};
-		summary.onclick = () => event.classList.toggle('open');
+		if (show_details == 0) {
+			summary.tabIndex = '0';
+			summary.onkeypress = (e) => {
+				if (e.keyCode === 13) {
+					event.classList.toggle('open');
+				}
+			};
+			summary.onclick = () => event.classList.toggle('open');
+		} else {
+			event.className = 'event open always';
+		}
 
 		let eName = document.createElement('span');
 		eName.className = 'name';
