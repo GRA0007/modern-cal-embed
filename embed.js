@@ -18,9 +18,25 @@ const colorBG = url.searchParams.get('colorbg') || '#FFFFFF';
 const colorText = url.searchParams.get('colortxt') || '#000000';
 const colorThemeText = url.searchParams.get('colorsecondarytxt') || '#FFFFFF';
 
-function createDateCell(day, date, month, today = false) {
+let today = new Date();
+today.setHours(0,0,0,0);
+let selectedDay = new Date(today.valueOf());
+
+function getHumanDate(date) {
+	return `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2,0)}-${date.getDate().toString().padStart(2,0)}`;
+}
+
+function createDateCell(date, todayd = false) {
+	let day = date.getDay();
+	let dateM = date.getDate();
+	let month = date.getMonth();
 	let dateCell = document.createElement('td');
-	if (today) {
+	dateCell.tabIndex = '-1';
+	dateCell.dataset.date = getHumanDate(date);
+	dateCell.onfocus = () => {
+		selectDay(getHumanDate(date), false)
+	};
+	if (todayd) {
 		dateCell.className = 'today';
 	}
 	let dayEl = document.createElement('span');
@@ -30,7 +46,7 @@ function createDateCell(day, date, month, today = false) {
 	let dateEl = document.createElement('span');
 	dateEl.className = 'day';
 	let dateSpan = document.createElement('span');
-	dateSpan.appendChild(document.createTextNode(date));
+	dateSpan.appendChild(document.createTextNode(dateM));
 	dateEl.appendChild(dateSpan);
 	dateCell.appendChild(dateEl);
 	let monthEl = document.createElement('span');
@@ -38,6 +54,18 @@ function createDateCell(day, date, month, today = false) {
 	monthEl.appendChild(document.createTextNode(MONTHS[month].substring(0,3).toUpperCase()));
 	dateCell.appendChild(monthEl);
 	return dateCell;
+}
+
+function selectDay(date, focus = true) {
+	selectedDay = new Date(date + 'T00:00');
+
+	document.querySelector('#date_label span').innerHTML = `${DAYS_OF_WEEK[selectedDay.getDay()]}, ${MONTHS[selectedDay.getMonth()]} ${selectedDay.getDate()}`;
+	document.getElementById('date').value = getHumanDate(selectedDay);
+
+	let selectedElement = document.querySelector(`#agenda td[data-date='${getHumanDate(selectedDay)}']`);
+	if (selectedElement && focus) {
+		selectedElement.focus();
+	}
 }
 
 function renderCalendar(meta, events) {
@@ -53,18 +81,29 @@ function renderCalendar(meta, events) {
 
 	// Nav
 	let btn_today = document.getElementById('btn_today');
+	let arrows = document.getElementById('arrows');
 	btn_today.onclick = () => {
 		// Scroll to today
-		document.querySelector('#agenda td.today').scrollIntoView(false);
+		//document.querySelector('#agenda td.today').scrollIntoView(false);
+		selectDay(getHumanDate(today));
+	};
+	document.getElementById('btn_prev').onclick = () => {
+		let prevDay = new Date(selectedDay.valueOf());
+		prevDay.setDate(prevDay.getDate() - 1);
+		selectDay(getHumanDate(prevDay));
+	};
+	document.getElementById('btn_next').onclick = () => {
+		let prevDay = new Date(selectedDay.valueOf());
+		prevDay.setDate(prevDay.getDate() + 1);
+		selectDay(getHumanDate(prevDay));
 	};
 	if (show_nav == 0) {
 		btn_today.style.display = 'none';
+		arrows.style.display = 'none';
 	}
 
 	// Sort events
 	events.sort((a,b) =>  a.startDate - b.startDate);
-	let today = new Date();
-	today.setHours(0,0,0,0);
 	// Filter after today
 	events = events.filter((e) => {
 		let end = new Date(e.endDate.valueOf());
@@ -73,9 +112,15 @@ function renderCalendar(meta, events) {
 	});
 
 	// Date
-	document.querySelector('#date_label span').innerHTML = `${DAYS_OF_WEEK[today.getDay()]}, ${MONTHS[today.getMonth()]} ${today.getDate()}`;
+	let date_label = document.getElementById('date_label');
+	let date_input = document.getElementById('date');
+	document.querySelector('#date_label span').innerHTML = `${DAYS_OF_WEEK[selectedDay.getDay()]}, ${MONTHS[selectedDay.getMonth()]} ${selectedDay.getDate()}`;
+	date_input.value = getHumanDate(selectedDay);
+	date_input.onchange = () => {
+		selectDay(date_input.value);
+	};
 	if (show_date == 0) {
-		document.getElementById('date_label').style.display = 'none';
+		date_label.style.display = 'none';
 	}
 
 	// Remove nav element
@@ -106,9 +151,7 @@ function renderCalendar(meta, events) {
 		if (events[i].startDate > today && !todayHasEvents) {
 			todayHasEvents = true;
 			row.appendChild(createDateCell(
-				events[i].startDate.getDay(),
-				events[i].startDate.getDate(),
-				events[i].startDate.getMonth(),
+				events[i].startDate,
 				true
 			));
 			column = document.createElement('td');
@@ -128,9 +171,7 @@ function renderCalendar(meta, events) {
 			}
 
 			row.appendChild(createDateCell(
-				events[i].startDate.getDay(),
-				events[i].startDate.getDate(),
-				events[i].startDate.getMonth(),
+				events[i].startDate,
 				curDay.getTime() == today.getTime()
 			));
 			column = document.createElement('td');

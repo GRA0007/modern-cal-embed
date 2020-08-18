@@ -64,10 +64,6 @@ nav button, nav select {
 	border-radius: 3px;
 	padding: 4px 8px;
 }
-nav #btn_today {
-	/* Without rest of nav */
-	margin-right: 14px;
-}
 nav #arrows {
 	display: flex;
 	align-items: center;
