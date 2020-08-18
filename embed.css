@@ -140,6 +140,12 @@ nav #date {
 	text-align: left !important;
 	color: var(--dark-gray);
 }
+#agenda .emptyday {
+	padding-left: 5px;
+	vertical-align: middle;
+	font-style: italic;
+	color: var(--dark-gray);
+}
 #agenda tr td {
 	padding-top: 14px;
 	vertical-align: top;

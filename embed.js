@@ -15,6 +15,28 @@ const show_view = url.searchParams.get('view') || 1;
 const default_view = url.searchParams.get('dview') || 0;
 const color = url.searchParams.get('color') || '#1A73E8';
 
+function createDateCell(day, date, month, today = false) {
+	let dateCell = document.createElement('td');
+	if (today) {
+		dateCell.className = 'today';
+	}
+	let dayEl = document.createElement('span');
+	dayEl.className = 'dayname';
+	dayEl.appendChild(document.createTextNode(DAYS_OF_WEEK[day].substring(0,3).toUpperCase()));
+	dateCell.appendChild(dayEl);
+	let dateEl = document.createElement('span');
+	dateEl.className = 'day';
+	let dateSpan = document.createElement('span');
+	dateSpan.appendChild(document.createTextNode(date));
+	dateEl.appendChild(dateSpan);
+	dateCell.appendChild(dateEl);
+	let monthEl = document.createElement('span');
+	monthEl.className = 'month';
+	monthEl.appendChild(document.createTextNode(MONTHS[month].substring(0,3).toUpperCase()));
+	dateCell.appendChild(monthEl);
+	return dateCell;
+}
+
 function renderCalendar(meta, events) {
 	// Title
 	if (show_title == 1) {
@@ -29,8 +51,8 @@ function renderCalendar(meta, events) {
 	// Nav
 	let btn_today = document.getElementById('btn_today');
 	btn_today.onclick = () => {
-		// Scroll to top
-		window.scrollTo({top: 0});
+		// Scroll to today
+		document.querySelector('#agenda td.today').scrollIntoView(false);
 	};
 	if (show_nav == 0) {
 		btn_today.style.display = 'none';
@@ -73,31 +95,38 @@ function renderCalendar(meta, events) {
 	let nowM = ampm(nowDate.getHours());
 	indicator.title = `${now} ${nowM}`;
 	let indicatorset = false;
+	let todayHasEvents = false;
 	for (let i = 0; i < (events.length < AGENDA_DAYS ? events.length : AGENDA_DAYS); i++) {
+		if (events[i].startDate > today && !todayHasEvents) {
+			todayHasEvents = true;
+			row.appendChild(createDateCell(
+				events[i].startDate.getDay(),
+				events[i].startDate.getDate(),
+				events[i].startDate.getMonth(),
+				true
+			));
+			column = document.createElement('td');
+			column.className = 'emptyday';
+			column.appendChild(document.createTextNode('No events today'));
+			row.appendChild(column);
+			days.push(row);
+		}
 		if (prevDay != events[i].startDate.toDateString()) {
 			prevDay = events[i].startDate.toDateString();
 			row = document.createElement('tr');
-			let date = document.createElement('td');
+
 			let curDay = new Date(events[i].startDate.valueOf());
 			curDay.setHours(0,0,0,0);
 			if (curDay.getTime() == today.getTime()) {
-				date.className = 'today';
+				todayHasEvents = true;
 			}
-			let dayname = document.createElement('span');
-			dayname.className = 'dayname';
-			dayname.appendChild(document.createTextNode(DAYS_OF_WEEK[events[i].startDate.getDay()].substring(0,3).toUpperCase()));
-			date.appendChild(dayname);
-			let day = document.createElement('span');
-			day.className = 'day';
-			let daySpan = document.createElement('span');
-			daySpan.appendChild(document.createTextNode(events[i].startDate.getDate()));
-			day.appendChild(daySpan);
-			date.appendChild(day);
-			let month = document.createElement('span');
-			month.className = 'month';
-			month.appendChild(document.createTextNode(MONTHS[events[i].startDate.getMonth()].substring(0,3).toUpperCase()));
-			date.appendChild(month);
-			row.appendChild(date);
+
+			row.appendChild(createDateCell(
+				events[i].startDate.getDay(),
+				events[i].startDate.getDate(),
+				events[i].startDate.getMonth(),
+				curDay.getTime() == today.getTime()
+			));
 			column = document.createElement('td');
 		}
 
