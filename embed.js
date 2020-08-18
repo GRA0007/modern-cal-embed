@@ -148,7 +148,9 @@ function renderCalendar(meta, events) {
 	let indicatorset = false;
 	let todayHasEvents = false;
 	for (let i = 0; i < (events.length < AGENDA_DAYS ? events.length : AGENDA_DAYS); i++) {
-		if (events[i].startDate > today && !todayHasEvents) {
+		let tomorrow = new Date(today.valueOf());
+		tomorrow.setDate(tomorrow.getDate() + 1);
+		if (events[i].startDate > tomorrow && !todayHasEvents) {
 			todayHasEvents = true;
 			row = document.createElement('tr');
 			row.appendChild(createDateCell(
