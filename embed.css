@@ -12,6 +12,7 @@ body {
 	background-color: var(--background-color);
 	color: var(--text-color);
 	font-family: sans-serif;
+	min-height: 100vh;
 }
 #loading {
 	display: flex;
@@ -123,6 +124,10 @@ nav #date_label:focus-within #date_dropdown {
 }
 nav #date {
 	width: 100%;
+}
+
+#month.hidden, #agenda.hidden {
+	display: none;
 }
 
 #agenda {
@@ -237,4 +242,119 @@ nav #date {
 	width: 10px;
 	background-color: var(--text-color);
 	border-radius: 100px;
+}
+
+
+#month {
+	table-layout: fixed;
+	border-collapse: collapse;
+	width: calc(100% - 8px);
+	box-sizing: border-box;
+	margin: 4px;
+}
+#month td {
+	border: 1px solid var(--border-color);
+	vertical-align: top;
+	overflow: hidden;
+}
+#month .labels td {
+	border: 0;
+	text-align: center;
+	color: var(--dark-gray);
+	font-weight: bold;
+	height: 1px;
+}
+#month td .date {
+	text-align: center;
+	display: block;
+	color: var(--dark-gray);
+	margin-top: 1px;
+}
+#month td .date.current {
+	color: var(--text-color);
+}
+#month td .date span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 1.7em;
+	width: 1.7em;
+	border-radius: 100px;
+}
+#month td .date.today span {
+	background-color: var(--theme-color);
+	color: var(--theme-text-color);
+}
+#month .event {
+	display: block;
+	white-space: nowrap;
+	cursor: pointer;
+	user-select: none;
+	font-size: .9em;
+	background-color: var(--theme-color);
+	color: var(--theme-text-color);
+	margin: 2px 0;
+	box-sizing: border-box;
+	padding: 2px 4px;
+	border-radius: 3px;
+}
+#month .past .event {
+	opacity: .6;
+}
+
+#monthDetails {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+	z-index: 5000;
+	display: none;
+	overflow-y: auto;
+}
+#monthDetails.shown {
+	display: flex;
+}
+#monthDetails .dialog {
+	background-color: var(--background-color);
+	pointer-events: all;
+	max-width: 60%;
+	box-shadow: 0 5px 30px rgba(0,0,0,.6);
+	border-radius: 10px;
+	box-sizing: border-box;
+	padding: 40px 20px 20px;
+	position: relative;
+	margin: auto;
+}
+#monthDetails button {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	border: 0;
+	padding: 0;
+	border-radius: 100px;
+	height: 30px;
+	width: 30px;
+	display: block;
+	cursor: pointer;
+	transition: background-color .2s;
+	outline: 0;
+	background-color: transparent;
+}
+#monthDetails button:hover {
+	background-color: rgba(0,0,0,.1);
+}
+#monthDetails button:focus {
+	background-color: rgba(0,0,0,.2);
+}
+#monthDetails button svg {
+	height: 24px;
+	width: 24px;
+	padding: 3px;
+}
+#monthDetails .summary {
+	display: block;
+	font-size: 1.6em;
+	margin-bottom: 14px;
 }

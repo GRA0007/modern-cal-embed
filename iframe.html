@@ -30,40 +30,24 @@
 
 				<div class="spacer"></div>
 
-				<!--<select id="view">
-					<option selected>Agenda</option>
-					<option>Month</option>
-				</select>-->
+				<select id="view">
+					<option value="0" selected>Agenda</option>
+					<option value="1">Month</option>
+				</select>
 			</nav>
 		</div>
 
-		<table id="agenda">
-			<tr class="today">
-				<td valign="top">
-					<span class="dayname">WED</span>
-					<span class="day"><span>12</span></span>
-					<span class="month">AUG</span>
-				</td>
-				<td valign="top">
-					<div class="event" tabindex="0">
-						<div class="summary">
-							<span class="name">Game Night</span>
-							<span class="time">7:30 - 9:00 pm</span>
-						</div>
-						<div class="details">
-							<strong>When:</strong> <span class="when">Thu, August 13, 7:30pm – 9:00pm</span><br>
-							<strong>Where:</strong> <span class="where">https://discord.gg/CUxsdE3</span><br>
-							<strong>Description:</strong> <span class="description">Catch up on Discord with everyone to play some fun group games together for a chill night. Most games are free to play online, so just bring your phone and banter 🦇</span>
-						</div>
-					</div>
-					<div class="indicator" title="Current time"></div>
-					<div class="event" tabindex="0">
-						<span class="name">Second event</span>
-						<span class="time">8:30 - 11:59 pm</span>
-					</div>
-				</td>
-			</tr>
-		</table>
+		<table id="agenda"></table>
+
+		<table id="month"></table>
+
+		<div id="monthDetails">
+			<div class="dialog">
+				<button type="button" id="btn_close" title="Close details" onclick="this.parentElement.parentElement.classList.remove('shown')"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg></button>
+				<span class="summary"></span>
+				<div class="details"></div>
+			</div>
+		</div>
 
 		<script src="ical.min.js"></script>
 		<script src="embed.js"></script>

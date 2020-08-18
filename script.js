@@ -3,8 +3,9 @@ const show_title_field = document.getElementById('show_title');
 const show_nav_field = document.getElementById('show_nav');
 const show_date_field = document.getElementById('show_date');
 const show_details_field = document.getElementById('show_details');
-//const show_view_field = document.getElementById('show_view');
-//const default_view_field = document.getElementById('default_view');
+const show_view_field = document.getElementById('show_view');
+const monday_start_field = document.getElementById('monday_start');
+const default_view_field = document.getElementById('default_view');
 const color_field = document.getElementById('color');
 const colorbg_field = document.getElementById('colorbg');
 const colortxt_field = document.getElementById('colortxt');
@@ -19,8 +20,9 @@ let show_title = 1;
 let show_nav = 1;
 let show_date = 1;
 let show_details = 0;
-//let show_view = 1;
-//let default_view = 0;
+let show_view = 1;
+let monday_start = 0;
+let default_view = 0;
 let color = '#1A73E8';
 let colorbg = '#FFFFFF';
 let colortxt = '#000000';
@@ -28,7 +30,7 @@ let colorsecondarytxt = '#FFFFFF';
 
 // Reload iframe with new params
 function refresh() {
-	let embed = `${document.URL.substr(0,document.URL.lastIndexOf('/'))}/iframe.html?ical=${encodeURIComponent(ical)}&title=${show_title}&nav=${show_nav}&date=${show_date}&details=${show_details}&color=${encodeURIComponent(color)}&colorbg=${encodeURIComponent(colorbg)}&colortxt=${encodeURIComponent(colortxt)}&colorsecondarytxt=${encodeURIComponent(colorsecondarytxt)}`;
+	let embed = `${document.URL.substr(0,document.URL.lastIndexOf('/'))}/iframe.html?ical=${encodeURIComponent(ical)}&title=${show_title}&nav=${show_nav}&date=${show_date}&view=${show_view}&details=${show_details}&monstart=${monday_start}&dview=${default_view}&color=${encodeURIComponent(color)}&colorbg=${encodeURIComponent(colorbg)}&colortxt=${encodeURIComponent(colortxt)}&colorsecondarytxt=${encodeURIComponent(colorsecondarytxt)}`;
 	embed_field.value = embed;
 	iframe.src = embed;
 }
@@ -58,10 +60,15 @@ show_details_field.addEventListener('change', () => {
 	refresh();
 });
 
-/*show_view_field.addEventListener('change', () => {
+show_view_field.addEventListener('change', () => {
 	show_view = show_view_field.checked ? 1 : 0;
 	refresh();
-});*/
+});
+
+monday_start_field.addEventListener('change', () => {
+	monday_start = monday_start_field.checked ? 1 : 0;
+	refresh();
+});
 
 color_field.addEventListener('change', () => {
 	color = color_field.value;
@@ -80,10 +87,10 @@ colorsectxt_field.addEventListener('change', () => {
 	refresh();
 });
 
-/*default_view_field.addEventListener('change', () => {
+default_view_field.addEventListener('change', () => {
 	default_view = default_view_field.value;
 	refresh();
-});*/
+});
 
 copy_button.addEventListener('click', () => {
 	embed_field.select();
