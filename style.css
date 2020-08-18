@@ -16,6 +16,13 @@ iframe {
 	border-radius: 3px;
 }
 
+h1 {
+	margin: 0;
+}
+#about {
+	display: block;
+	margin: 0 0 30px;
+}
 h2 {
 	margin-top: 0;
 }
