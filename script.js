@@ -1,3 +1,5 @@
+const CORS_URL = 'https://cors-anywhere.herokuapp.com/';
+
 const ical_field = document.getElementById('ical');
 const show_title_field = document.getElementById('show_title');
 const show_nav_field = document.getElementById('show_nav');
@@ -12,6 +14,7 @@ const colortxt_field = document.getElementById('colortxt');
 const colorsectxt_field = document.getElementById('colorsecondarytxt');
 const embed_field = document.getElementById('embed_link');
 const copy_button = document.getElementById('copy_url');
+const cors_button = document.getElementById('add_cors');
 const iframe = document.getElementById('iframe');
 
 // Defaults
@@ -100,6 +103,14 @@ copy_button.addEventListener('click', () => {
 	window.setTimeout(() => {
 		copy_button.innerHTML = 'Copy';
 	}, 1000);
+});
+
+cors_button.addEventListener('click', () => {
+	if (!ical_field.value.startsWith(CORS_URL)) {
+		ical_field.value = CORS_URL + ical_field.value;
+	}
+	ical = ical_field.value;
+	refresh();
 });
 
 refresh();
