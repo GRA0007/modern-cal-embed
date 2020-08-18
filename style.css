@@ -18,6 +18,10 @@ h2 {
 	margin-top: 0;
 }
 
+label {
+	display: inline-block;
+	margin-top: 6px;
+}
 input[type=url] {
 	width: 100%;
 	box-sizing: border-box;

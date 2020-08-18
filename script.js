@@ -6,6 +6,9 @@ const show_details_field = document.getElementById('show_details');
 //const show_view_field = document.getElementById('show_view');
 //const default_view_field = document.getElementById('default_view');
 const color_field = document.getElementById('color');
+const colorbg_field = document.getElementById('colorbg');
+const colortxt_field = document.getElementById('colortxt');
+const colorsectxt_field = document.getElementById('colorsecondarytxt');
 const embed_field = document.getElementById('embed_link');
 const copy_button = document.getElementById('copy_url');
 const iframe = document.getElementById('iframe');
@@ -19,10 +22,13 @@ let show_details = 0;
 //let show_view = 1;
 //let default_view = 0;
 let color = '#1A73E8';
+let colorbg = '#FFFFFF';
+let colortxt = '#000000';
+let colorsecondarytxt = '#FFFFFF';
 
 // Reload iframe with new params
 function refresh() {
-	let embed = `${document.URL.substr(0,document.URL.lastIndexOf('/'))}/iframe.html?ical=${encodeURIComponent(ical)}&title=${show_title}&nav=${show_nav}&date=${show_date}&details=${show_details}&color=${encodeURIComponent(color)}`;
+	let embed = `${document.URL.substr(0,document.URL.lastIndexOf('/'))}/iframe.html?ical=${encodeURIComponent(ical)}&title=${show_title}&nav=${show_nav}&date=${show_date}&details=${show_details}&color=${encodeURIComponent(color)}&colorbg=${encodeURIComponent(colorbg)}&colortxt=${encodeURIComponent(colortxt)}&colorsecondarytxt=${encodeURIComponent(colorsecondarytxt)}`;
 	embed_field.value = embed;
 	iframe.src = embed;
 }
@@ -59,6 +65,18 @@ show_details_field.addEventListener('change', () => {
 
 color_field.addEventListener('change', () => {
 	color = color_field.value;
+	refresh();
+});
+colorbg_field.addEventListener('change', () => {
+	colorbg = colorbg_field.value;
+	refresh();
+});
+colortxt_field.addEventListener('change', () => {
+	colortxt = colortxt_field.value;
+	refresh();
+});
+colorsectxt_field.addEventListener('change', () => {
+	colorsecondarytxt = colorsectxt_field.value;
 	refresh();
 });
 

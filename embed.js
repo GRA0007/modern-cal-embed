@@ -14,6 +14,9 @@ const show_details = url.searchParams.get('details') || 0;
 const show_view = url.searchParams.get('view') || 1;
 const default_view = url.searchParams.get('dview') || 0;
 const color = url.searchParams.get('color') || '#1A73E8';
+const colorBG = url.searchParams.get('colorbg') || '#FFFFFF';
+const colorText = url.searchParams.get('colortxt') || '#000000';
+const colorThemeText = url.searchParams.get('colorsecondarytxt') || '#FFFFFF';
 
 function createDateCell(day, date, month, today = false) {
 	let dateCell = document.createElement('td');
@@ -82,6 +85,9 @@ function renderCalendar(meta, events) {
 
 	// Colors
 	document.documentElement.style.setProperty('--theme-color', color);
+	document.documentElement.style.setProperty('--text-color', colorText);
+	document.documentElement.style.setProperty('--background-color', colorBG);
+	document.documentElement.style.setProperty('--theme-text-color', colorThemeText);
 
 	// Create elements
 	let days = [];
