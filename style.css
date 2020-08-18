@@ -1,6 +1,6 @@
 body {
 	margin: 20px;
-	background: #EEE;
+	background: #FFF;
 	font-family: sans-serif;
 }
 main {
@@ -10,8 +10,10 @@ main {
 	grid-gap: 20px;
 }
 iframe {
-	border: 1px solid #CCC;
+	border: 1px solid #777;
 	width: 100%;
+	margin-top: 20px;
+	border-radius: 3px;
 }
 
 h2 {
@@ -28,13 +30,24 @@ input[type=url] {
 }
 input[type=url], select {
 	padding: 4px 6px;
+	background-color: inherit;
+	font: inherit;
+	font-size: .9em;
+	border: 1px solid #777;
+	border-radius: 3px;
+}
+input[type=color], button {
+	padding: 4px 6px;
+	border: 1px solid #777;
+	border-radius: 3px;
+	background: none;
 }
 
 @media screen and (max-width: 650px) {
 	main {
 		display: block;
 	}
-	iframe {
+	#embed {
 		margin-top: 20px;
 	}
 }
