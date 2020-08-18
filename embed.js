@@ -150,6 +150,7 @@ function renderCalendar(meta, events) {
 	for (let i = 0; i < (events.length < AGENDA_DAYS ? events.length : AGENDA_DAYS); i++) {
 		if (events[i].startDate > today && !todayHasEvents) {
 			todayHasEvents = true;
+			row = document.createElement('tr');
 			row.appendChild(createDateCell(
 				events[i].startDate,
 				true
